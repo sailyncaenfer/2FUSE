@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2FUSE</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+    <div id="top-bar">
+      <h1>2FUSE</h1>
+      <div id="top-bar-actions">
+        <button id="restart-btn-top" title="Restart">&#8635; Restart</button>
+        <button id="settings-btn" title="Settings" aria-label="Settings">&#9881;</button>
+      </div>
+    </div>
+
+    <div id="hud">
+      <div class="hud-item">
+        <span class="label">Score</span>
+        <span id="score" class="value">0</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">Time</span>
+        <span id="time" class="value">60.0</span>
+      </div>
+      <div class="hud-item">
+        <span class="label">Combo</span>
+        <span id="combo" class="value">0</span>
+      </div>
+    </div>
+
+    <div id="effects">
+      <div class="effect-badge" id="effect-red" data-color="red">
+        RED (score x3)
+        <div class="effect-bar"><div class="effect-bar-fill" id="effect-fill-red"></div></div>
+      </div>
+      <div class="effect-badge" id="effect-green" data-color="green">
+        GREEN (instant respawn)
+        <div class="effect-bar"><div class="effect-bar-fill" id="effect-fill-green"></div></div>
+      </div>
+      <div class="effect-badge" id="effect-blue" data-color="blue">
+        BLUE (timer x0.8 speed)
+        <div class="effect-bar"><div class="effect-bar-fill" id="effect-fill-blue"></div></div>
+      </div>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="last-score-popup" class="hidden"></div>
+
+    <div id="game-over-overlay" class="hidden">
+      <div class="game-over-box">
+        <h2>Time's Up!</h2>
+        <p>Final Score: <span id="final-score">0</span></p>
+        <p>Max Combo: <span id="final-combo">0</span></p>
+        <button id="restart-btn">Play Again</button>
+      </div>
+    </div>
+
+    <div id="instructions">
+      <p>Tap two tiles of the same <strong>value</strong> and <strong>color</strong> to fuse them.
+      1+1 → 2, 2+2 → ★. Fusing two ★ triggers a color power-up. Chain fuses quickly to build combo score.</p>
+    </div>
+  </div>
+
+  <div id="ready-overlay" class="hidden">GET READY...</div>
+  <div id="timesup-overlay" class="hidden">TIME'S UP</div>
+
+  <div id="settings-overlay" class="hidden">
+    <div class="settings-box">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button id="settings-close-btn" title="Close" aria-label="Close">&#10005;</button>
+      </div>
+
+      <label class="setting-row">
+        <div class="setting-text">
+          <span class="setting-title">Zen</span>
+          <span class="setting-desc">No timer</span>
+        </div>
+        <span class="toggle">
+          <input type="checkbox" id="setting-zen">
+          <span class="toggle-slider"></span>
+        </span>
+      </label>
+
+      <label class="setting-row">
+        <div class="setting-text">
+          <span class="setting-title">Stride</span>
+          <span class="setting-desc">Initial spawn has 8+ green tiles</span>
+        </div>
+        <span class="toggle">
+          <input type="checkbox" id="setting-stride">
+          <span class="toggle-slider"></span>
+        </span>
+      </label>
+
+      <label class="setting-row">
+        <div class="setting-text">
+          <span class="setting-title">Instant</span>
+          <span class="setting-desc">Tiles always instantly spawn</span>
+        </div>
+        <span class="toggle">
+          <input type="checkbox" id="setting-instant">
+          <span class="toggle-slider"></span>
+        </span>
+      </label>
+
+      <label class="setting-row">
+        <div class="setting-text">
+          <span class="setting-title">Quick Rematch</span>
+          <span class="setting-desc">No 0.75s lock after a mismatch</span>
+        </div>
+        <span class="toggle">
+          <input type="checkbox" id="setting-quick-rematch">
+          <span class="toggle-slider"></span>
+        </span>
+      </label>
+
+      <p class="settings-note">Changes apply immediately. Zen, Instant, and Quick Rematch affect the current round right away; Stride applies on the next restart.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
